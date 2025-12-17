@@ -1,0 +1,346 @@
+---
+
+---
+
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      type="text/javascript"
+      src="https://vz99.in/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"
+      id="jquery-core-js"></script>
+  </head>
+  <body>
+    <div
+      id="keo-bong-widget-host"
+      data-endpoint="https://vz99.in/wp-json/keo-bong/v1/proxy"
+    >
+    </div>
+    <script>
+      (function () {
+        const host = document.getElementById("keo-bong-widget-host");
+        if (!host || host.shadowRoot) return;
+
+        const apiEndpoint = host.dataset.endpoint;
+        const shadowRoot = host.attachShadow({
+          mode: "open",
+        });
+
+        shadowRoot.innerHTML = `
+            <style>
+                #odd-table{margin:0 auto;border:1px solid #ddd;box-shadow:0 2px 8px rgba(0,0,0,0.1);padding:15px;background:#fff;font-size:12px;font-weight:700;position:relative;line-height:normal;font-family:Tahoma,Arial,Helvetica,sans-serif}
+                #odd-header-mobile,#odd-header-desktop,#odd-mobile,#odd-desktop{display:none}#odd-table *{box-sizing:border-box;font-size:12px}#odd-table a{text-decoration:none}#odd-table button{font-family:Tahoma,Arial,Helvetica,sans-serif}#input-search{height:24px;font-size:14px;line-height:normal;margin:0}#odd-table tr:nth-of-type(2n+1){background:unset}#odd-table ul li{padding:0;margin:0}#odd-table ul li::before{content:''}#odd-table table,#odd-table table tbody tr,#odd-table table tbody tr td{padding:0;margin:0;border:unset;text-align:unset}#odd-table table tr,#odd-table table tr{border-bottom:0;border-top:0;border-left:0;border-right:0}#odd-table .sr_desktop{margin-bottom:20px}#odd-table .sr_mobile{}#odd-table .heading_table{position:relative;top:0;left:0;right:0;width:100%;z-index:999;border-top:1px solid #fff;border-right:2px solid #fff;background:#fff}#odd-table .heading_table table{background-color:#000;padding:0!important;margin:0!important}#odd-table .heading_table td{text-align:center;color:#fff;background-color:#000099;font-size:12px;padding:5px;border-right:1px solid #fff;border-bottom:1px solid #fff;line-height:1.5}#odd-table .bg_h2{font-size:16px;background-color:#000099;color:#ffffff;font-weight:400;border-top:2px solid #000099;border-right:2px solid #fff;text-align:left;padding:6px 5px 4px 10px;margin:0;position:relative;text-transform:uppercase}#odd-table .bg_handicap{background-color:#b1b1b1;color:#666;padding:3px 0 0 10px;height:18px;font-family:Tahoma,Arial,Helvetica,sans-serif;font-size:9px;border:0}#odd-table .open_diem_so{background-color:#000099;color:#ffffff;text-align:left;font-weight:700;margin:0;padding:10px}#odd-table .open_diem_so span{font-size:14px}#odd-table .chutyle{color:#ee6363}#odd-table .TYLETT_3a{color:#464646;text-align:center;line-height:15px}#odd-table .TYLETT_3c{color:#464646;text-align:left;padding-left:3px;padding-right:3px}#odd-table tr.dong1{background-color:#ffccbc;font-weight:700;font-size:12px;border-bottom-color:#cea193}#odd-table tr.dong2{background:#ffddd2;border-bottom-color:#cea193;font-weight:700;font-size:12px}#odd-table tr.dong3{background-color:#c6d4f1;line-height:18px}#odd-table tr.dong4{background-color:#e4e4e4;line-height:18px}#odd-table .dong:hover{background-color:#c7c1c1}#odd-table .do{color:#810101}#odd-table .diem_so ul{list-style:none;padding:0;margin:0;background-color:#d5dcc7;border-top:1px solid #fff}#odd-table .diem_so ul::after{content:"";display:block;clear:both}#odd-table .diem_so li{float:left;width:6.25%;height:65px;border-left:1px solid #fff;border-right:1px solid #fff;border-bottom:1px solid #000}#odd-table .diem_so li p{font-weight:700;font-size:12px}#odd-table .diem_so li .ti_so{background-color:#000;color:#fff;margin:0;padding:5px}#odd-table .diem_so li:last-child{width:43.75%;text-align:center;padding:25px 0}#odd-table .TYLETT_2a{color:#000;text-align:left;padding:5px 10px;font-size:14px;border-top:1px solid #fff;border-right:2px solid #fff}#odd-table .TYLETT_3{background-color:#c6d4f1;line-height:18px}#odd-table tr.TYLETT_4{background-color:#b1b1b1;line-height:22px}#odd-table .TYLETT_3_1{background-color:#e4e4e4;line-height:18px}#odd-table .TYLETT_3a,#odd-table .TYLETT_3b,#odd-table .TYLETT_3c,#odd-table .TYLETT_3d{padding:3px;vertical-align:top;border-top:2px solid #fff;border-right:2px solid #fff}#odd-table .hide-on-mobile-keo.hiep_1>td:first-child{border-top:2px solid #fff;border-right:2px solid #fff}#odd-table .TYLETT_3d{color:#464646;text-align:right;padding-right:3px}#odd-table tr.hiep_1{background-color:#eee8cd;font-family:Tahoma,Arial,Helvetica,sans-serif;font-weight:700;font-size:12px}#odd-table .hiep_1 img{width:15px}#odd-table .hiep_1_btn{position:relative;cursor:pointer;color:#690;font-size:12px}#odd-table .diem_so ul{display:none;margin-right:2px}#odd-table .diem_so ul.open{display:block}#odd-table .open_diem_so{cursor:pointer;position:relative;border-right:1px solid #fff}#odd-table .open_diem_so::after{content:"";border-top:solid 6px #333;border-left:solid 6px transparent;border-right:solid 6px transparent;position:absolute;right:10px;top:9px}#odd-table .hiep_1_btn::after{content:"";border-top:solid 5px #690;border-left:solid 5px transparent;border-right:solid 5px transparent;position:absolute;right:-15px;top:5px}#odd-table .open_diem_so.active::after{transform:rotate(180deg)}#odd-table .filter_item{position:relative;padding:5px 5px 5px 30px;display:block;cursor:pointer;color:#464646;margin-right:20px}#odd-table .filter_item input{position:absolute;opacity:0;cursor:pointer}#odd-table .filter_item:hover input~.checked_icon{background-color:#ccc}#odd-table .checked_icon{position:absolute;top:2px;left:0;height:20px;width:20px;background-color:#eee;border-radius:3px;transition:background-color .2s;-webkit-transition:background-color .2s}#odd-table .checked_icon:after{content:"";position:absolute;display:none}#odd-table .filter_item input:checked~.checked_icon:after{display:block}#odd-table .filter_item .checked_icon:after{left:7px;top:2px;width:5px;height:10px;border:solid #464646;border-width:0 2px 2px 0;-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}#odd-table #open_filter{float:right;border:1px solid #000;padding:8px 30px 8px 15px;cursor:pointer;border-radius:3px;position:relative;margin:12px 5px 0}#odd-table #open_filter::after{content:"";border-top:solid 6px #464646;border-left:solid 6px transparent;border-right:solid 6px transparent;position:absolute;right:10px;top:12px}#odd-table #open_filter.active:after{transform:rotate(180deg)}#odd-table #filter-select-all{padding:5px 15px;border-radius:5px;margin:0 10px 10px 0}#odd-table #filter-clear{padding:5px 15px;border-radius:5px}#odd-table #filter_options{position:absolute;top:57px;right:0;display:none;background-color:#fff;padding:20px 15px;border-bottom-right-radius:3px;border-bottom-left-radius:3px;box-shadow:0 2px 4px 0 rgba(0,0,0,.16);border-top:1px solid #ccc;z-index:1000}#odd-table #filter li{display:inline-block}#odd-table .search_tyle{width:calc(100% - 185px);display:inline-block;padding:5px;margin:10px 5px 3px 0;border:1px solid #464646;border-radius:3px;position:relative}#odd-table #search-clear{padding:7px 15px;background-color:#436590;color:#fff;border-radius:5px;font-weight:600}#odd-table .search_tyle input{border:none;-webkit-appearance:none;padding:5px 25px 5px 5px;display:inline-block;vertical-align:middle;outline:none;width:100%}#odd-table .search_tyle span{background-image:url(https://7mvn.it.com/keobd/img/search-icon.png);background-repeat:no-repeat;background-size:contain;font-size:0;width:25px;height:25px;border:none;background-color:transparent;display:inline-block;vertical-align:middle;cursor:pointer;position:absolute;right:5px;top:5px}#odd-table .guild-live{font-weight:500;margin:0 0 5px}#odd-table #myBtn{display:none;position:fixed;bottom:20px;right:5px;z-index:99;padding:0;border:none;margin:0;outline:none;cursor:pointer;border-radius:50px}#odd-table #myBtn:hover{background-color:#fff}#odd-table .btn-keo-ngay{cursor:pointer;padding:5px;margin:5px 1px 5px 0;color:#fff;background-color:#000099;font-weight:600;line-height:normal;font-size:12px}#odd-table .btn-keo-ngay.active{-webkit-animation:living 2000ms infinite;-moz-animation:living 2000ms infinite;-o-animation:living 2000ms infinite;animation:living 2000ms infinite;background-color:#000099}@-webkit-keyframes living{0%{background-color:#000;-webkit-box-shadow:0 0 3px #000}50%{background-color:#ff7201;-webkit-box-shadow:0 0 10px #000}100%{background-color:#000;-webkit-box-shadow:0 0 3px #000}}
+                .sr_mobile .keo-dong td:nth-child(n+6) {display: none;}
+                .sr_mobile .keo-dong td:nth-child(2) { width: 34%; }
+                .sr_mobile .keo-dong td:nth-child(3) { width: 22%; }
+                .sr_mobile .keo-dong td:nth-child(4) { width: 22%; }
+                .sr_mobile .keo-dong td:nth-child(5) { width: 10%; }
+                @media (max-width: 767px) {
+                    #odd-table { padding: 10px; border: none; box-shadow: none; margin: 0 -15px; }
+                    .search-form { display: flex; flex-wrap: wrap; align-items: center; }
+                    .search_tyle { flex-grow: 1; width: auto; margin: 0 10px 10px 0; }
+                    #open_filter { float: none; flex-shrink: 0; margin: 0 0 10px 0; white-space: nowrap; }
+                    #date-buttons-container, .clear { width: 100%; }
+                    #filter_options { right: 5px; left: 5px; width: auto; }
+                    #date-buttons-container { text-align: center; }
+                    .btn-keo-ngay { padding: 8px 6px; margin: 2px; }
+                }
+                @media only screen and (max-width:520px){#odd-table .sr_desktop{}#odd-table .bg_h2{font-size:15px}#odd-table .diem_so li{width:10%}#odd-table .diem_so li:last-child{width:50%}#odd-table .Tyleweb_1a{width:34%}}
+            </style>
+            <div id="odd-table">
+                <div id="widget-loader" style="text-align: center; padding: 50px; font-family: sans-serif;">Đang tải dữ liệu...</div>
+                <div class="heading_table" style="display: none;">
+                    <div class="search-form">
+                        <div class="search_tyle">
+                            <input id="input-search" placeholder="Tìm trận đấu..." name="search-input" autocomplete="off" title="search-input">
+                            <span></span>
+                        </div>
+                        <p id="open_filter">Lọc Giải Đấu</p>
+                        <div id="filter_options" class="popup-list">
+                            <button id="filter-select-all">Chọn tất cả</button>
+                            <button id="filter-clear">Xóa Lọc</button>
+                            <label class="filter_item">Ngoại Hạng Anh<input type="checkbox" value="english premier league"><span class="checked_icon"></span></label>
+                            <label class="filter_item">Serie A - Ý<input type="checkbox" value="italy serie a"><span class="checked_icon"></span></label>
+                            <label class="filter_item">Laliga - TBN<input type="checkbox" value="la liga"><span class="checked_icon"></span></label>
+                            <label class="filter_item">League I - Pháp<input type="checkbox" value="france ligue 1"><span class="checked_icon"></span></label>
+                            <label class="filter_item">Bundesliga - Đức<input type="checkbox" value="germany bundesliga 1"><span class="checked_icon"></span></label>
+                            <label class="filter_item">Cúp C1<input type="checkbox" value="uefa champions league"><span class="checked_icon"></span></label>
+                            <label class="filter_item">Cúp C2<input type="checkbox" value="uefa europa league"><span class="checked_icon"></span></label>
+                        </div>
+                        <div class="clear"></div>
+                        <div id="date-buttons-container" style="display: inline-block;"></div>
+                    </div>
+                    <table id="odd-header-mobile" width="100%" border="0" cellspacing="1" cellpadding="0"><tbody><tr><td width="12%">Giờ</td><td width="34%">Trận Đấu</td><td width="22%">Tỷ Lệ</td><td width="22%">Tài Xỉu</td><td width="10%">1x2</td></tr></tbody></table>
+                    <table id="odd-header-desktop" width="100%" border="0" cellspacing="1" cellpadding="0"><tbody><tr><td rowspan="2" width="9%">Giờ</td><td rowspan="2" width="27%">Trận Đấu</td><td colspan="3">Cả Trận</td><td colspan="3">Hiệp 1</td></tr><tr class="trd_TYLETT_1"><td class="Tyleweb_1" width="12%">Tỷ Lệ</td><td class="Tyleweb_1" width="12%">Tài Xỉu</td><td class="Tyleweb_1" width="8%">1x2</td><td class="Tyleweb_1" width="12%">Tỷ Lệ</td><td class="Tyleweb_1" width="12%">Tài Xỉu</td><td class="Tyleweb_1" width="8%">1x2</td></tr></tbody></table>
+                </div>
+                <div id="odd-mobile" class="sr_mobile" style="display: none;">
+                    <div class="keolive"><h3 class="bg_h2" id="header-odds-live">KÈO BÓNG ĐÁ TRỰC TUYẾN</h3><div id="load_keo_mb"><div class="loading" style="text-align: center"><img decoding="async" style="width: 100%" src="https://7mvn.it.com/keobd/img/preloader.gif" alt="loading"></div></div></div>
+                    <h3 class="bg_h2" id="header-odds">KÈO BÓNG ĐÁ HÔM NAY</h3><div id="normal_mbs"><div class="loading" style="text-align: center"><img decoding="async" style="width: 100%" src="https://7mvn.it.com/keobd/img/preloader.gif" alt="loading"></div></div>
+                </div>
+                <div id="odd-desktop" class="sr_desktop" style="display: none;">
+                    <div class="keolive"><h3 class="bg_h2" id="header-odds-live">KÈO BÓNG ĐÁ TRỰC TUYẾN</h3><div id="load_keo"><div class="loading" style="text-align: center"><img decoding="async" style="width: 100%" src="https://7mvn.it.com/keobd/img/preloader.gif" alt="loading"></div></div></div>
+                    <h3 class="bg_h2" id="header-odds">KÈO BÓNG ĐÁ HÔM NAY</h3><div id="normal_dt"><div class="loading" style="text-align: center"><img decoding="async" style="width: 100%" src="https://7mvn.it.com/keobd/img/preloader.gif" alt="loading"></div></div>
+                </div>
+            </div>
+        `;
+        const initializeWidget = () => {
+          const $ = window.jQuery;
+          shadowRoot.getElementById("widget-loader").style.display = "none";
+          shadowRoot.querySelector(".heading_table").style.display = "block";
+          const isMobile =
+            /android|bb\d+|meego.+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(
+              navigator.userAgent
+            ) ||
+            /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
+              navigator.userAgent.substr(0, 4)
+            );
+          if (isMobile) {
+            shadowRoot.getElementById("odd-mobile").style.display = "block";
+            shadowRoot.getElementById("odd-header-mobile").style.display =
+              "table";
+          } else {
+            shadowRoot.getElementById("odd-desktop").style.display = "block";
+            shadowRoot.getElementById("odd-header-desktop").style.display =
+              "table";
+          }
+          const generateDateButtons = () => {
+            const container = shadowRoot.getElementById(
+              "date-buttons-container"
+            );
+            if (!container) return;
+            let buttonsHTML =
+              '<button class="btn-keo-ngay active" value="1" date="KÈO NHÀ CÁI HÔM NAY">HÔM NAY</button>';
+            buttonsHTML +=
+              '<button class="btn-keo-ngay" value="2" date="KÈO NHÀ CÁI NGÀY MAI">NGÀY MAI</button>';
+            const now = new Date(
+              new Date().toLocaleString("en-US", {
+                timeZone: "Asia/Ho_Chi_Minh",
+              })
+            );
+            for (let i = 2; i <= 5; i++) {
+              const dateObj = new Date(now);
+              dateObj.setDate(dateObj.getDate() + i);
+              const displayDate =
+                ("0" + dateObj.getDate()).slice(-2) +
+                "/" +
+                ("0" + (dateObj.getMonth() + 1)).slice(-2);
+              const buttonValue = i + 1;
+              const dateAttribute = "KÈO NHÀ CÁI NGÀY " + displayDate;
+              buttonsHTML += `<button class="btn-keo-ngay" value="${buttonValue}" date="${dateAttribute}">${displayDate}</button>`;
+            }
+            container.innerHTML = buttonsHTML;
+          };
+          generateDateButtons();
+          var date = 1,
+            loading_odd = false;
+          function get_keo_live() {
+            if (date !== 1 || loading_odd) return;
+            loading_odd = true;
+            $.ajax({
+              type: "POST",
+              contentType: "application/json",
+              data: JSON.stringify({
+                type: "live",
+              }),
+              url: apiEndpoint,
+              success: function (response) {
+                if (isMobile) {
+                  $(shadowRoot).find("#load_keo_mb").html(response.content);
+                } else {
+                  $(shadowRoot).find("#load_keo").html(response.content);
+                }
+                runAfterAjax();
+              },
+              complete: function () {
+                loading_odd = false;
+                setTimeout(get_keo_live, 10023);
+              },
+            });
+          }
+          function get_keo_normal(source) {
+            if (loading_odd && source === "isSelectDate") return;
+            loading_odd = true;
+            $.ajax({
+              type: "POST",
+              contentType: "application/json",
+              data: JSON.stringify({
+                type: "normal",
+                date: date,
+              }),
+              url: apiEndpoint,
+              success: function (response) {
+                if (isMobile) {
+                  $(shadowRoot).find("#normal_mbs").html(response.content);
+                } else {
+                  $(shadowRoot).find("#normal_dt").html(response.content);
+                }
+                runAfterAjax();
+              },
+              complete: function () {
+                loading_odd = false;
+                if (source !== "isSelectDate") {
+                  setTimeout(get_keo_normal, 60000);
+                }
+              },
+            });
+          }
+          get_keo_live();
+          get_keo_normal();
+          var typingTimer;
+          var doneTypingInterval = 500;
+          var $input = $(shadowRoot).find("#input-search");
+          shadowRoot.clearSearch = function () {
+            $input.val("");
+            search_keo();
+          };
+          function openFilter() {
+            $(shadowRoot).find("#open_filter").toggleClass("active");
+            $(shadowRoot).find("#filter_options").slideToggle();
+          }
+          $(shadowRoot).find("#open_filter").on("click", openFilter);
+          function search_keo() {
+            $(shadowRoot)
+              .find(".search_tyle span")
+              .css(
+                "background-image",
+                "url(https://7mvn.it.com/keobd/img/loading_icon.gif)"
+              )
+              .css("width", "25px");
+            $(shadowRoot)
+              .find(".odd-competition, .keo-search, .keo-ti-so")
+              .show();
+            filter_keo();
+            var c = $input.val().toLowerCase();
+            if (c.length > 0) {
+              $(shadowRoot)
+                .find(".keo-search")
+                .each(function () {
+                  var home = $(this).data("home") || "";
+                  var away = $(this).data("away") || "";
+                  (home.toLowerCase() + " " + away.toLowerCase()).search(c) ===
+                    -1 && $(this).hide();
+                });
+            }
+            hideCompetitionEmpty();
+            setTimeout(function () {
+              const span = $(shadowRoot).find(".search_tyle span");
+              if ($input.val().length > 0) {
+                span.css({
+                  "background-image":
+                    "url(https://7mvn.it.com/keobd/img/x.png)",
+                  width: "15px",
+                });
+                span[0].onclick = shadowRoot.clearSearch;
+              } else {
+                span.css({
+                  "background-image":
+                    "url(https://7mvn.it.com/keobd/img/search-icon.png)",
+                  width: "25px",
+                });
+                span[0].onclick = null;
+              }
+            }, 500);
+          }
+          function filter_keo() {
+            var c = [];
+            $(shadowRoot)
+              .find("#filter_options input:checkbox")
+              .each(function () {
+                if ($(this).prop("checked")) {
+                  var _ = $(this).val();
+                  _ == "la liga"
+                    ? c.push("spain segunda division", "spain primera division")
+                    : c.push(_);
+                }
+              });
+            if (c.length) {
+              $(shadowRoot)
+                .find(".odd-competition")
+                .each(function () {
+                  var _ = $(this).data("name");
+                  c.indexOf(_) < 0 ? $(this).hide() : $(this).show();
+                });
+            }
+          }
+          function hideCompetitionEmpty() {
+            $(shadowRoot)
+              .find(".odd-competition")
+              .each(function () {
+                var hasVisible = $(this).find(".keo-search:visible").length > 0;
+                hasVisible ? $(this).show() : $(this).hide();
+              });
+          }
+          function runAfterAjax() {
+            search_keo();
+          }
+          $input.on("keyup", function () {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(search_keo, doneTypingInterval);
+          });
+          $(shadowRoot)
+            .find("#filter-select-all")
+            .on("click", function () {
+              $(shadowRoot)
+                .find("#filter_options input:checkbox")
+                .prop("checked", true);
+              search_keo();
+            });
+          $(shadowRoot)
+            .find("#filter-clear")
+            .on("click", function () {
+              $(shadowRoot)
+                .find("#filter_options input:checkbox")
+                .prop("checked", false);
+              search_keo();
+            });
+          $(shadowRoot)
+            .find("#filter_options input:checkbox")
+            .on("change", function () {
+              search_keo();
+            });
+          shadowRoot.addEventListener("click", function (e) {
+            const dateButton = e.target.closest(".btn-keo-ngay");
+            const scoreButton = e.target.closest(".open_diem_so");
+            if (dateButton) {
+              const self = $(dateButton);
+              if (self.hasClass("active")) return;
+              $(shadowRoot).find(".btn-keo-ngay.active").removeClass("active");
+              self.addClass("active");
+              date = parseInt(self.attr("value"));
+              $(shadowRoot).find("#header-odds").html(self.attr("date"));
+              $(shadowRoot)
+                .find("#normal_dt, #normal_mbs")
+                .html(
+                  '<div class="loading" style="text-align: center"><img decoding="async" style="width: 100%" src="https://7mvn.it.com/keobd/img/preloader.gif" alt="loading"></div>'
+                );
+              get_keo_normal("isSelectDate");
+              if (date === 1) {
+                $(shadowRoot).find(".keolive").show();
+                get_keo_live();
+              } else {
+                $(shadowRoot).find(".keolive").hide();
+              }
+              return;
+            }
+            if (scoreButton) {
+              const $button = $(scoreButton);
+              $button.toggleClass("active");
+              $button.next("ul").toggleClass("open");
+            }
+          });
+        };
+        if (window.jQuery) {
+          initializeWidget();
+        } else {
+          const script = document.createElement("script");
+          script.src =
+            "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js";
+          script.onload = initializeWidget;
+          shadowRoot.appendChild(script);
+        }
+      })();
+    </script>
+  </body>
+</html>

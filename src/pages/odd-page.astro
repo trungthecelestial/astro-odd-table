@@ -1,0 +1,62 @@
+---
+import LocalScripts from "../components/odd-page/LocalScripts.astro";
+export const prerender = false;
+---
+
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="stylesheet"
+      href="https://www.freegershkovich.com/wp-content/plugins/stream-player-plugin/assets/dist/main.css?ver=2.6.8"
+      type="text/css"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      href="https://www.freegershkovich.com/wp-content/themes/flatsome/assets/css/flatsome.css?ver=3.19.8"
+      type="text/css"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      href="https://www.freegershkovich.com/wp-content/plugins/get-api-sport/assets/css/style-comp.css?ver=1.5.9"
+      type="text/css"
+      media="all"
+    />
+    <style is:global>
+      .page-wrapper {
+        padding: 0;
+      }
+      .date-buttons-container {
+        padding-inline: 0;
+      }
+      .company-dropdown-list {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <main
+        id="main"
+        style={{
+          marginTop: 0,
+        }}
+      >
+        <div class="row page-wrapper">
+          <div id="table-company_odd"></div>
+
+          <div class="loader-container">
+            <div class="loader-table" id="tablestanding-loader"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <LocalScripts />
+  </body>
+</html>

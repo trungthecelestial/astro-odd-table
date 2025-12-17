@@ -1,0 +1,757 @@
+---
+
+---
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://hackkimcuongff.com/css/getkeo.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <style>
+      .inside-article {
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="entry-content" itemprop="text">
+      <div class="content-area page-wrapper bang-keo" id="content" role="main">
+      </div>
+
+      <script
+        crossorigin="anonymous"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        is:inline
+        src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+      <script is:inline>
+        var device = "desktop";
+        var date = 1;
+        var home_url = "https://hackkimcuongff.com";
+        var $ = jQuery;
+
+        function addDays(pickedDate = new Date(), add = 0) {
+          pickedDate.setDate(pickedDate.getDate() + add);
+          return pickedDate;
+        }
+
+        if (isMobile()) {
+          device = "mobile";
+        }
+
+        function formatDate(pickedDate = new Date()) {
+          const year = pickedDate.toLocaleString("default", {
+            year: "numeric",
+          });
+          const month = pickedDate.toLocaleString("default", {
+            month: "2-digit",
+          });
+          const day = pickedDate.toLocaleString("default", { day: "2-digit" });
+          return [day, month].join("/");
+        }
+
+        function isMobile() {
+          if (
+            navigator.userAgent.match(/Android/i) ||
+            navigator.userAgent.match(/webOS/i) ||
+            navigator.userAgent.match(/iPhone/i) ||
+            navigator.userAgent.match(/iPad/i) ||
+            navigator.userAgent.match(/iPod/i) ||
+            navigator.userAgent.match(/BlackBerry/i) ||
+            navigator.userAgent.match(/Windows Phone/i)
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+
+        var htmlStr =
+          `<div class="row row-main">
+<div class="large-12 col">
+    <div class="col-inner">
+        <div class="table-wrapper">
+            <div class="loading-icon" style="display: none;"><img id="loading-image"
+                    src="https://hackkimcuongff.com/image/loading_icon.gif" alt="keopro-loading"></div>
+            <div class="heading_table">
+                <div class="search-form">
+                    <div class="search_tyle">
+                        <input id="input-search" placeholder="Tìm tên đội bóng..." name="search-input"
+                            autocomplete="off" title="search-input">
+                        <span class="search-span"
+                            style="background-image: url(&quot;https://hackkimcuongff.com/image/search-icon-1.png&quot;); width: 25px;"></span>
+                        <span class="clear-span" style="display: none;">Xóa</span>
+                    </div>
+                    <p id="open_filter" onclick="openFilter();">Lọc</p>
+                    <div id="filter_options" class="popup-list">
+                        <button id="filter-select-all">Chọn tất cả</button>
+                        <button id="filter-clear">Xóa Lọc</button>
+                        <label class="filter_item">Cúp C1 Châu Âu
+                            <input type="checkbox" value="uefa champions league">
+                            <span class="checked_icon"></span>
+                        </label>
+                        <label class="filter_item">Ngoại Hạng Anh
+                            <input type="checkbox" value="english premier league">
+                            <span class="checked_icon"></span>
+                        </label>
+                        <label class="filter_item">VĐQG Ý
+                            <input type="checkbox" value="italy serie a">
+                            <span class="checked_icon"></span>
+                        </label>
+                        <label class="filter_item">VĐQG Tây Ban Nha
+                            <input type="checkbox" value="la liga">
+                            <span class="checked_icon"></span>
+                        </label>
+                        <label class="filter_item">VĐQG Pháp
+                            <input type="checkbox" value="france ligue 1">
+                            <span class="checked_icon"></span>
+                        </label>
+                        <label class="filter_item">VĐQG Đức
+                            <input type="checkbox" value="germany bundesliga 1">
+                            <span class="checked_icon"></span>
+                        </label>
+                    </div>
+                    <div class="clear"></div>
+                    <button class="btn-keo-ngay" value="1" date="KÈO NHÀ CÁI HÔM NAY">
+                        <span style="display: inline-block;"></span>HÔM NAY
+                    </button>
+                    <button class="btn-keo-ngay" value="2" date="KÈO NHÀ CÁI NGÀY MAI">
+                        <span></span>NGÀY MAI
+                    </button>
+                    <button class="btn-keo-ngay" value="3" date="KÈO NHÀ CÁI NGÀY ` +
+          formatDate(addDays(new Date(), 2)) +
+          `">
+                        <span></span>` +
+          formatDate(addDays(new Date(), 2)) +
+          ` </button>
+                    <button class="btn-keo-ngay" value="4" date="KÈO NHÀ CÁI NGÀY ` +
+          formatDate(addDays(new Date(), 3)) +
+          `">
+                        <span></span>` +
+          formatDate(addDays(new Date(), 3)) +
+          ` </button>
+                    <button class="btn-keo-ngay" value="5" date="KÈO NHÀ CÁI NGÀY ` +
+          formatDate(addDays(new Date(), 4)) +
+          `">
+                        <span></span>` +
+          formatDate(addDays(new Date(), 4)) +
+          ` </button>
+                    <button class="btn-keo-ngay" value="6" date="KÈO NHÀ CÁI NGÀY ` +
+          formatDate(addDays(new Date(), 5)) +
+          `">
+                        <span></span>` +
+          formatDate(addDays(new Date(), 5)) +
+          ` </button>
+                </div>
+                <table class="table-header" width="100%" border="0" cellspacing="1" cellpadding="0">
+                    <tbody>
+                        <tr>
+                            <td rowspan="2" width="9%">Giờ</td>
+                            <td rowspan="2" width="27%">Trận Đấu</td>
+                            <td colspan="3">Cả Trận</td>
+                            <td colspan="3">Hiệp 1</td>
+                        </tr>
+                        <tr class="trd_TYLETT_1">
+                            <td class="Tyleweb_1" width="12%">Tỷ Lệ</td>
+                            <td class="Tyleweb_1" width="12%">Tài Xỉu</td>
+                            <td class="Tyleweb_1" width="8%">1x2</td>
+                            <td class="Tyleweb_1" width="12%">Tỷ Lệ</td>
+                            <td class="Tyleweb_1" width="12%">Tài Xỉu</td>
+                            <td class="Tyleweb_1" width="8%">1x2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="sr_desktop">
+                <div id="keolive">
+                    <h3 class="bg_h2" id="header-odds-live">KÈO NHÀ CÁI TRỰC TUYẾN</h3>
+                    <div id="load_keo">
+
+                    </div>
+                    <p class="message-live" style="text-align: center;  display: none;">Hiện không có
+                        trận đấu nào đang diễn ra</p>
+                </div>
+                <h3 class="bg_h2" id="header-odds">KÈO NHÀ CÁI HÔM NAY</h3>
+                <div id="normal_dt"></div>
+                <p class="message-normal" style="text-align: center;">Hiện không có kết
+                    quả nào phù hợp</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>`;
+        if (device == "mobile") {
+          htmlStr =
+            `<div class="row row-main">
+    <div class="large-12 col">
+        <div class="col-inner">
+            <div class="table-wrapper">
+                <div class="loading-icon" style="display: none;"><img id="loading-image"
+                        src="https://hackkimcuongff.com/image/loading_icon.gif" alt="keopro-loading"></div>
+                <div class="heading_table">
+                    <div class="search-form">
+                        <div class="search_tyle">
+                            <input id="input-search" placeholder="Tìm tên đội bóng..." name="search-input"
+                                autocomplete="off" title="search-input">
+                            <span class="search-span"
+                                style="background-image: url(&quot;https://hackkimcuongff.com/image/search-icon-1.png&quot;); width: 25px;"></span>
+                            <span class="clear-span" onclick="clearSearch();" style="display: none;">Xóa</span>
+                        </div>
+                        <p id="open_filter" onclick="openFilter();">Lọc</p>
+                        <div id="filter_options" class="popup-list">
+                            <button id="filter-select-all">Chọn tất cả</button>
+                            <button id="filter-clear">Xóa Lọc</button>
+                            <label class="filter_item">Cúp C1 Châu Âu
+                                <input type="checkbox" value="uefa champions league">
+                                <span class="checked_icon"></span>
+                            </label>
+                            <label class="filter_item">Ngoại Hạng Anh
+                                <input type="checkbox" value="english premier league">
+                                <span class="checked_icon"></span>
+                            </label>
+                            <label class="filter_item">VĐQG Ý
+                                <input type="checkbox" value="italy serie a">
+                                <span class="checked_icon"></span>
+                            </label>
+                            <label class="filter_item">VĐQG Tây Ban Nha
+                                <input type="checkbox" value="la liga">
+                                <span class="checked_icon"></span>
+                            </label>
+                            <label class="filter_item">VĐQG Pháp
+                                <input type="checkbox" value="france ligue 1">
+                                <span class="checked_icon"></span>
+                            </label>
+                            <label class="filter_item">VĐQG Đức
+                                <input type="checkbox" value="germany bundesliga 1">
+                                <span class="checked_icon"></span>
+                            </label>
+                        </div>
+                        <div class="clear"></div>
+                        <button class="btn-keo-ngay" value="1" date="KÈO NHÀ CÁI HÔM NAY">
+                            <span style="display: inline-block;"></span>HÔM NAY
+                        </button>
+                        <button class="btn-keo-ngay" value="2" date="KÈO NHÀ CÁI NGÀY MAI">
+                            <span></span>NGÀY MAI
+                        </button>
+                        <button class="btn-keo-ngay" value="3" date="KÈO NHÀ CÁI NGÀY ` +
+            formatDate(addDays(new Date(), 2)) +
+            `">
+                            <span></span>` +
+            formatDate(addDays(new Date(), 2)) +
+            ` </button>
+                        <button class="btn-keo-ngay" value="4" date="KÈO NHÀ CÁI NGÀY ` +
+            formatDate(addDays(new Date(), 3)) +
+            `">
+                            <span></span>` +
+            formatDate(addDays(new Date(), 3)) +
+            ` </button>
+                        <button class="btn-keo-ngay" value="5" date="KÈO NHÀ CÁI NGÀY ` +
+            formatDate(addDays(new Date(), 4)) +
+            `">
+                            <span></span>` +
+            formatDate(addDays(new Date(), 4)) +
+            ` </button>
+                        <button class="btn-keo-ngay" value="6" date="KÈO NHÀ CÁI NGÀY ` +
+            formatDate(addDays(new Date(), 5)) +
+            `">
+                            <span></span>` +
+            formatDate(addDays(new Date(), 5)) +
+            ` </button>
+                    </div>
+                    <table class="table-header" width="100%" border="0" cellspacing="1" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td width="12%">Giờ</td>
+                                <td width="34%">Trận Đấu</td>
+                                <td width="22%">Tỷ Lệ</td>
+                                <td width="22%">Tài Xỉu</td>
+                                <td width="10%">1x2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="sr_mobile">
+                    <div id="keolive">
+                        <h3 class="bg_h2" id="header-odds-live">KÈO NHÀ CÁI TRỰC TUYẾN</h3>
+                        <div id="load_keo_mb"></div>
+                        <p class="message-live" style="text-align: center; display: none;">Hiện không có trận đấu nào đang diễn ra</p>
+                    </div>
+                    <h3 class="bg_h2" id="header-odds">KÈO NHÀ CÁI HÔM NAY</h3>
+                    <div id="normal_mbs">
+                        
+                    </div>
+                    <p class="message-normal" style="text-align: center;  display: none;">Hiện không có kết quả nào phù hợp</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>`;
+        }
+        $(".bang-keo").html(htmlStr);
+        $(".btn-keo-ngay span").first().css("display", "inline-block");
+
+        var itab = setInterval(function () {
+          if (jQuery(".heading_table").is(":visible") == true) {
+            get_keo_live(true);
+            clearInterval(itab);
+          }
+        }, 500);
+        let isTabActive = true;
+        let pauseTimeout = null;
+        function handleTabVisibilityChange() {
+          if (document.hidden || document.msHidden || document.webkitHidden) {
+            pauseTimeout = setTimeout(() => {
+              isTabActive = false;
+            }, 60000);
+          } else {
+            clearTimeout(pauseTimeout);
+            isTabActive = true;
+          }
+        }
+        document.addEventListener(
+          "visibilitychange",
+          handleTabVisibilityChange
+        );
+        handleTabVisibilityChange();
+        get_keo_live(true);
+        setInterval(get_keo_live, 10033);
+        setInterval(get_keo_normal, 60000);
+        function get_keo_live(isFirst) {
+          if (!isTabActive) return;
+          if (date !== 1) {
+            return;
+          }
+          jQuery.ajax({
+            contentType: "application/json",
+            data: JSON.stringify({
+              device: device,
+              type: "live",
+            }),
+            success: function (result) {
+              if (result.html != "Error: wrong request CsrfToken.") {
+                if (device === "desktop") {
+                  jQuery("#load_keo").html(result.html);
+                } else {
+                  jQuery("#load_keo_mb").html(result.html);
+                }
+                if (!isFirst) runAfterAjax();
+                if (isFirst) {
+                  if ($("#normal_dt").length || $("#normal_mbs").length) {
+                    get_keo_normal();
+                  }
+                }
+              }
+            },
+            type: "POST",
+            url: "https://hackkimcuongff.com/wp-json/api/v1/post/ajax/tylekeo/tyso",
+          });
+        }
+        function get_keo_normal(isSelectDate) {
+          if (!isTabActive) return;
+          if (typeof isSelectDate === "undefined") {
+            if (date !== 1) {
+              return;
+            }
+          }
+          jQuery.ajax({
+            contentType: "application/json",
+            data: JSON.stringify({
+              date,
+              device: device,
+              type: "normal",
+            }),
+            success: function (result) {
+              if (result.html != "Error: wrong request CsrfToken.") {
+                if (device === "desktop")
+                  jQuery("#normal_dt").html(result.html);
+                else jQuery("#normal_mbs").html(result.html);
+                runAfterAjax();
+              }
+            },
+            type: "POST",
+            url: "https://hackkimcuongff.com/wp-json/api/v1/post/ajax/tylekeo/tyso",
+          });
+        }
+        var typingTimer;
+        var doneTypingInterval = 500;
+        var $input = $("#input-search");
+        $input.on("keyup", function () {
+          query = $(this).val();
+          if (query.length > 0) {
+            $(".search_tyle span.clear-span").show();
+            $(".search_tyle span.search-span").hide();
+          } else {
+            $(".search_tyle span.clear-span").hide();
+            $(".search_tyle span.search-span").show();
+          }
+          clearTimeout(typingTimer);
+          typingTimer = setTimeout(search_keo, doneTypingInterval);
+        });
+        $input.on("keydown", function () {
+          clearTimeout(typingTimer);
+        });
+        function clearSearch() {
+          $("#input-search").val("");
+          search_keo();
+        }
+        $("#filter-select-all").on("click", function () {
+          $("#filter_options input:checkbox").prop("checked", true);
+          search_keo();
+        });
+        $("#filter-clear").on("click", function () {
+          $("#filter_options input:checkbox").prop("checked", false);
+          search_keo();
+        });
+        $("#filter_options input:checkbox").change(function () {
+          search_keo();
+        });
+        function elementHideShow(elementToHideOrShow) {
+          var el = $("#" + elementToHideOrShow);
+          el.hide();
+        }
+        function elementShow(elementToHideOrShow) {
+          var el = $("#" + elementToHideOrShow);
+          el.show();
+        }
+        function isViewTLH1(isView, id) {
+          var elBut = $("#showHiep" + id);
+          var hiep1 = localStorage.getItem("keo_hiep_1_open");
+          hiep1 = JSON.parse(hiep1);
+          var hiep1_final = hiep1;
+          if (Array.isArray(hiep1)) {
+            hiep1_final = hiep1_final.filter(function (open_id) {
+              return open_id !== id;
+            });
+          }
+          if (isView === 0) {
+            elementShow("viewTyLeHiep" + id);
+            elBut.css("opacity", "0");
+            if (Array.isArray(hiep1)) {
+              hiep1_final.push(id);
+            } else {
+              hiep1_final = [id];
+            }
+          } else {
+            elementHideShow("viewTyLeHiep" + id);
+            elBut.css("opacity", "1");
+          }
+          localStorage.setItem("keo_hiep_1_open", JSON.stringify(hiep1_final));
+        }
+        function open_exsit_open_item() {
+          var hiep1 = localStorage.getItem("keo_hiep_1_open");
+          hiep1 = JSON.parse(hiep1);
+          var tiso = localStorage.getItem("keo_tiso_open");
+          tiso = JSON.parse(tiso);
+          if (Array.isArray(tiso)) {
+            tiso.forEach(function (id) {
+              openTySo(id, true);
+            });
+          }
+          if (Array.isArray(hiep1)) {
+            hiep1.forEach(function (id) {
+              isViewTLH1(0, id);
+            });
+          }
+        }
+        function openTySo(id, isAjaxCall) {
+          if (isAjaxCall === "undefined") isAjaxCall = false;
+          var thisElement = $("#tiso" + id);
+          var tiso = localStorage.getItem("keo_tiso_open");
+          tiso = JSON.parse(tiso);
+          var tiso_final = tiso;
+          if (Array.isArray(tiso)) {
+            tiso_final = tiso_final.filter(function (open_id) {
+              return open_id !== id;
+            });
+          }
+          if (thisElement.hasClass("active") && !isAjaxCall) {
+            thisElement.removeClass("active");
+            thisElement.next().removeClass("open");
+          } else {
+            thisElement.addClass("active");
+            thisElement.next().addClass("open");
+            if (Array.isArray(tiso)) {
+              tiso_final.push(id);
+            } else {
+              tiso_final = [id];
+            }
+          }
+          localStorage.setItem("keo_tiso_open", JSON.stringify(tiso_final));
+        }
+        ads_arr = [
+          {
+            image: "https://hackkimcuongff.com/image/20240118-980x184.gif",
+            link: "https://www.fundangky.com/vi/Tottenham/Register/?aff=397582",
+            test: "Fun 88 - Fan thể thao",
+            title: "Fun 88 - Fan thể thao",
+            type: "image",
+          },
+        ];
+        function add_ads() {
+          if (typeof ads_arr !== "undefined" && device == "mobile") {
+            if (ads_arr.length > 0) {
+              var count_ads = 0;
+              var insert = false;
+              var $this = null;
+              var class_arr = ["dong1", "dong2", "dong3", "dong4"];
+              var $adsrow = 0;
+              $(".keo-dong").each(function () {
+                if (!$(this).is(":visible")) return;
+                if (count_ads < ads_arr.length) {
+                  $this = $(this);
+                  insert = false;
+                  class_arr.every(function (className) {
+                    if ($this.hasClass(className)) {
+                      if ($this.next().hasClass("keo-ti-so")) {
+                        $this = $this.next();
+                        insert = true;
+                        return false;
+                      }
+                      if ($this.next().hasClass("hiep_1")) {
+                        $this = $this.next();
+                        if ($this.next().hasClass("keo-ti-so")) {
+                          $this = $this.next();
+                          insert = true;
+                          return false;
+                        }
+                      }
+                      if (!$this.next().hasClass(className)) {
+                        insert = true;
+                        return false;
+                      }
+                    }
+                    return true;
+                  });
+                  if (insert) $adsrow += 1;
+                  if (insert && $adsrow % 1 === 0) {
+                    var str_ad = "";
+                    if (ads_arr[count_ads].type === "image") {
+                      str_ad =
+                        '<tr class="wordad"><td colspan="8" align="center"><a target="_blank" rel="nofollow" href="' +
+                        ads_arr[count_ads].link +
+                        '"><img style="width: 100%;" src="' +
+                        ads_arr[count_ads].image +
+                        '" alt="' +
+                        ads_arr[count_ads].title +
+                        '" /></a></td></tr>';
+                    } else {
+                      str_ad =
+                        '<tr class="wordad"><td colspan="8" align="center"><a class="blink_me" target="_blank" style="color:red;line-height:20px;" rel="nofollow" href="' +
+                        ads_arr[count_ads].link +
+                        '" title="' +
+                        ads_arr[count_ads].text +
+                        '"><b>' +
+                        ads_arr[count_ads].text +
+                        "</b></a></td></tr>";
+                    }
+                    $(str_ad).insertAfter($this);
+                    count_ads++;
+                  }
+                }
+              });
+            }
+          }
+        }
+        function auto_resize() {
+          window.parent.postMessage(
+            {
+              args: this.window.document.body.scrollHeight,
+              func: "tyle_resize_iframes",
+            },
+            "*"
+          );
+        }
+        function checkEmptyAllValue() {
+          var show = false;
+          $(".message-live").hide();
+          $(".message-normal").hide();
+          if ("desktop" === device) {
+            if (!$("#load_keo p.no-odds").length) {
+              show = false;
+              $("#load_keo")
+                .find(".odd-competition")
+                .each(function () {
+                  if ($(this).is(":visible")) {
+                    show = true;
+                  }
+                });
+              if (!show) $(".message-live").show();
+            }
+            if (!$("#normal_dt p.no-odds").length) {
+              show = false;
+              $("#normal_dt")
+                .find(".odd-competition")
+                .each(function () {
+                  if ($(this).is(":visible")) {
+                    show = true;
+                  }
+                });
+              if (!show) $(".message-normal").show();
+            }
+          } else {
+            if (!$("#load_keo_mb p.no-odds").length) {
+              show = false;
+              $("#load_keo_mb")
+                .find(".odd-competition")
+                .each(function () {
+                  if ($(this).is(":visible")) {
+                    show = true;
+                  }
+                });
+              if (!show) $(".message-live").show();
+            }
+            if (!$("#normal_mbs p.no-odds").length) {
+              show = false;
+              $("#normal_mbs")
+                .find(".odd-competition")
+                .each(function () {
+                  if ($(this).is(":visible")) {
+                    show = true;
+                  }
+                });
+              if (!show) $(".message-normal").show();
+            }
+          }
+        }
+        function filter_keo() {
+          var array_filters = [];
+          $("#filter_options input:checkbox").each(function () {
+            if ($(this).prop("checked")) {
+              var filter_value = $(this).val();
+              if (filter_value == "la liga") {
+                array_filters.push("spain segunda division");
+                array_filters.push("spain primera division");
+              } else array_filters.push(filter_value);
+            }
+          });
+          if (array_filters.length) {
+            $(".odd-competition").each(function () {
+              var competition_name = $(this).data("name");
+              if (array_filters.indexOf(competition_name) < 0) {
+                $(this).hide();
+              } else {
+                $(this).show();
+              }
+            });
+          }
+        }
+        function hideCompetitionEmpty() {
+          var show = false;
+          $(".odd-competition").each(function () {
+            show = false;
+            $(this)
+              .find(".keo-search")
+              .each(function () {
+                if ($(this).is(":visible")) {
+                  show = true;
+                }
+              });
+            if (show) $(this).show();
+            else $(this).hide();
+          });
+          checkEmptyAllValue();
+        }
+        function openFilter() {
+          $("#open_filter").toggleClass("active");
+          $("#filter_options").slideToggle();
+        }
+        function runAfterAjax() {
+          search_keo();
+        }
+        function search_keo() {
+          $(".search_tyle span.search-span").show();
+          $(".search_tyle span.clear-span").hide();
+          $(".search_tyle span.search-span").css(
+            "background-image",
+            "url(" + home_url + "/image/loading_icon.gif)"
+          );
+          $(".search_tyle span.search-span").css("width", "25px");
+          $(".odd-competition").show();
+          filter_keo();
+          $(".keo-search").show();
+          $(".keo-ti-so").show();
+          var query = $("#input-search").val();
+          query = query.toLowerCase();
+          if (query.length > 0) {
+            $(".keo-search").each(function () {
+              var home = $(this).data("home");
+              var away = $(this).data("away");
+              var str_search = home + " " + away;
+              if (str_search.search(query) === -1) {
+                $(this).hide();
+                if ($(this).next().hasClass("hiep_1")) {
+                  $(this).next().hide();
+                  if ($(this).next().next().hasClass("keo-ti-so"))
+                    $(this).next().next().hide();
+                } else if ($(this).next().hasClass("keo-ti-so")) {
+                  $(this).next().hide();
+                }
+              }
+            });
+          }
+          hideCompetitionEmpty();
+          open_exsit_open_item();
+          add_ads();
+          setTimeout(function () {
+            var query = $input.val();
+            if (query.length > 0) {
+              $(".search_tyle span.clear-span").show();
+              $(".search_tyle span.search-span").hide();
+            } else {
+              $(".search_tyle span.clear-span").hide();
+              $(".search_tyle span.search-span").css(
+                "background-image",
+                "url(" + home_url + "/image/search-icon-1.png)"
+              );
+              $(".search_tyle span.search-span").css("width", "25px");
+              $(".search_tyle span.search-span").show();
+            }
+            auto_resize();
+          }, 500);
+        }
+
+        function toTopFunction() {
+          $("html, body").animate(
+            {
+              scrollTop: 0,
+            },
+            1000
+          );
+        }
+
+        $(".btn-keo-ngay").click(function () {
+          var thisValue = parseInt($(this).attr("value"));
+          if (thisValue === 1) {
+            get_keo_live();
+            $("#keolive").show();
+          } else {
+            $("#keolive").hide();
+          }
+          $(".btn-keo-ngay span").css("display", "none");
+          $(this).find("span").css("display", "inline-block");
+          if (thisValue !== date) {
+            date = thisValue;
+            $("#header-odds").html($(this).attr("date"));
+            get_keo_normal("isSelectDate");
+          } else if (thisValue === 1) {
+            if ("mobile" === device) {
+              $("html, body").animate(
+                { scrollTop: $("#header-odds").offset().top },
+                1000
+              );
+            } else {
+              $("html, body").animate(
+                { scrollTop: $("#header-odds").offset().top - 170 },
+                1000
+              );
+            }
+          }
+        });
+      </script>
+    </div>
+  </body>
+</html>
